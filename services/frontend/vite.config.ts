@@ -1,8 +1,8 @@
 import babel from "@rolldown/plugin-babel";
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
-import "dotenv/config";
 import tailwindcss from "@tailwindcss/vite";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import { fileURLToPath } from "url";
+import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,5 +10,11 @@ export default defineConfig({
 	server: {
 		host: true,
 		port: Number(process.env.FRONTEND_PORT) || 3000,
+	},
+	resolve: {
+		alias: {
+			"@components": fileURLToPath(new URL("components", import.meta.url)),
+			"@src": fileURLToPath(new URL("src", import.meta.url)),
+		},
 	},
 });
