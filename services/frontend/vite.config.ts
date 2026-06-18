@@ -6,11 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [
-		react(),
-		babel({ presets: [reactCompilerPreset()] }),
-		tailwindcss(),
-	],
+	plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
 	server: {
 		host: true,
 		port: Number(process.env.FRONTEND_PORT) || 3000,
