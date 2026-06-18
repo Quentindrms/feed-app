@@ -1,0 +1,28 @@
+# .github/workflows/code-quality.yml
+name: Code Quality
+
+on:
+  pull_request:
+    branches: [main, development]
+
+# Annule les runs précédents si on push à nouveau sur la même branche/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm biome ci .
