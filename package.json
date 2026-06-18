@@ -1,25 +1,35 @@
 {
-	"name": "feed-app",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"lint": "biome lint .",
-		"format": "biome format --write",
-		"check": "biome check --write ."
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devEngines": {
-		"packageManager": {
-			"name": "pnpm",
-			"version": "^11.1.2",
-			"onFail": "download"
-		}
-	},
-	"type": "module",
-	"devDependencies": {
-		"@biomejs/biome": "^2.5.0"
-	}
+  "name": "feed-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "biome lint .",
+    "format": "biome format --write",
+    "check": "biome check --write .",
+    "check:ci": "biome ci .",
+    "check:lefthook": "biome check --write --no-errors-on-unmatched {staged_files}"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.1.2",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@10.33.0",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
+    "lefthook": "^2.1.9"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["darwin", "linux"],
+      "cpu": ["x64", "arm64"]
+    }
+  }
 }
