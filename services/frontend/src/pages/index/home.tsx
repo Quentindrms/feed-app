@@ -1,8 +1,3 @@
-
 export default function Home() {
-    return (
-        <>
-            <p>Index</p>
-        </>
-    )
+	return <p>Index</p>;
 }
