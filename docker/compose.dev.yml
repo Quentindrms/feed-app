@@ -1,0 +1,55 @@
+name: feed-app-developement
+
+services:
+  frontend:
+    container_name: feed-app-frontend-dev
+    build:
+      context: ../services/frontend
+      dockerfile: dev.dockerfile 
+    ports: 
+      - ${FRONTEND_PORT:-3000}:3000
+    volumes:
+      - ../services/frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - frontend
+
+  adminer:
+    container_name: feed-app-adminer-dev
+    image: adminer:latest
+    ports: 
+      - ${ADMINER_PORT:-8080}:8080
+    environment:
+      - ADMINER_HOST=postgres
+      - ADMINER_USER=${DB_USERNAME}
+      - ADMINER_PASSWORD=${DB_PASSWORD}
+    networks:
+      - database 
+
+  backend:
+    container_name: feed-app-backend-dev
+    build:
+      context: ../services/backend
+      dockerfile: dev.dockerfile 
+    ports:
+    - ${BACKEND_PORT:-4000}:4000
+    volumes:
+      - ../services/backend:/app
+      - /app/node_modules
+    environment: 
+      - NODE_ENV=development
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DATABASE_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_NAME}?schema=public
+    networks:
+      - frontend
+      - database 
+networks:
+  database: 
+    driver: bridge
+  frontend: 
+    driver: bridge
+  backend:
+    driver: bridge
