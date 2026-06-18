@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
-import App from "./App";
+import Home from "./pages/index/home";
 
 export const routes = createBrowserRouter([{
-    path: "/",
-    Component: App
+    path: "",
+    Component: Home,
 }
 ])
