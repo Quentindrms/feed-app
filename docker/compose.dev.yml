@@ -13,6 +13,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - FRONTEND_PORT=${FRONTEND_PORT:-3000}
     networks:
       - frontend
 
@@ -39,6 +40,7 @@ services:
       - ../services/backend:/app
       - /app/node_modules
     environment: 
+      - BACKEND_PORT=${BACKEND_PORT:-4000}
       - NODE_ENV=development
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
