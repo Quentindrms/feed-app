@@ -3,3 +3,4 @@ pre-commit:
     biome:
       glob: "*.{js,ts,jsx,tsx,json,jsonc}"
       run: "pnpm check:lefthook -- {staged_files}"
+      stage_fixed: true
