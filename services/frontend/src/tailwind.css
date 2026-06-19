@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Stack+Sans+Headline:wght@200..700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -14,4 +15,7 @@
 	--color-action-orange: oklch(76.9% 0.188 70.08);
 	--color-action-green: oklch(69.6% 0.17 162.48);
 	--color-action-red: oklch(64.5% 0.246 16.439);
+
+	--font-title: "IBM Plex Sans", sans-serif;
+	--font-base: "Stack Sans Headline", sans-serif;
 }
