@@ -11,6 +11,7 @@
 	--color-dark: oklch(13% 0.028 261.692);
 	--color-light: oklch(98.4% 0.003 247.858);
 	--color-muted-text: oklch(70.4% 0.04 256.788);
+	--color-muted-text-dark: oklch(55.4% 0.046 257.417);
 
 	--color-action-purple: oklch(62.7% 0.265 303.9);
 	--color-action-orange: oklch(76.9% 0.188 70.08);
