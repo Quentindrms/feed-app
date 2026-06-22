@@ -9,4 +9,10 @@ export class AppController {
 	getHello(): string {
 		return this.appService.getHello();
 	}
+
+	@Get("test")
+	async test() {
+		const feed = await this.appService.getTest();
+		return { feed };
+	}
 }
