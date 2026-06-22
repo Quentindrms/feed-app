@@ -9,7 +9,9 @@ interface NavLinkProps {
 export default function NavLink(props: NavLinkProps) {
 	return (
 		<a
-			className={clsx(["font-title font-bold text-muted-text hover:text-muted-text-dark"])}
+			className={clsx([
+				"font-title font-bold text-muted-text text-2xl hover:text-muted-text-dark hover:scale-110 transition-transform duration-150",
+			])}
 			href={props.link}
 		>
 			{props.children}
