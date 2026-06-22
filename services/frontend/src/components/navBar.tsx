@@ -4,7 +4,7 @@ import NavLink from "./navLink";
 
 export default function NavBar() {
 	return (
-		<div className="flex flex-col md:flex-row items-center gap-2 bg-muted-background/50 p-2 rounded-2xl">
+		<div className="flex flex-col md:flex-row items-center gap-2 bg-muted-background/15 p-2 rounded-2xl">
 			<div className="">
 				<img src={icons} alt="Feed-App logo" className="w-md"></img>
 			</div>
