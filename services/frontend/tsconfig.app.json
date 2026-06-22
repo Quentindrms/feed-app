@@ -30,5 +30,5 @@
 			"@public": ["public/*"]
 		}
 	},
-	"include": ["src", "src/components"]
+	"include": ["src", "src/components", "src/public", "src/utils"]
 }
