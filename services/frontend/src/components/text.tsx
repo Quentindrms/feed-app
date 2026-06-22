@@ -16,6 +16,7 @@ export default function Text(props: Textprops) {
 			className={clsx([
 				textSizeClasses[props.size],
 				"font-base",
+				"text-justify",
 				weightClasses[props.weight],
 			])}
 		>
