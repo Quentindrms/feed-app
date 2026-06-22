@@ -1,7 +1,15 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
 	"files": {
-		"includes": ["services/frontend/*", "services/backend/*", "**/*.js", "!services/backend/dist", "!**/package.json"]
+		"includes": [
+			"services/frontend/src/*.css",
+			"services/frontend/**",
+			"services/backend/**",
+			"**/*.js",
+			"!services/backend/dist",
+			"!**/package.json",
+			"!**/.pnpm-store"
+		]
 	},
 	"css": {
 		"parser": {
@@ -27,8 +35,24 @@
 		}
 	},
 	"formatter": {
-		"lineWidth": 120
+		"lineWidth": 100
 	},
-	"linter": {},
+	"linter": {
+		"rules": {
+			"style": {
+				"noNonNullAssertion": "off",
+				"useImportType": "off"
+			},
+			"complexity": {
+				"noUselessFragments": "info"
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "info"
+			},
+			"nursery": {
+				"noUndeclaredClasses": "off"
+			}
+		}
+	},
 	"assist": {}
 }

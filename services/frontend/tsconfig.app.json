@@ -6,6 +6,8 @@
 		"module": "esnext",
 		"types": ["vite/client"],
 		"skipLibCheck": true,
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
@@ -19,7 +21,14 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"erasableSyntaxOnly": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+
+		"paths": {
+			"@components/*": ["components/*"],
+			"@src/*": ["src/*"],
+			"@utils/*": ["utils/*"],
+			"@public": ["public/*"]
+		}
 	},
-	"include": ["src"]
+	"include": ["src", "src/components", "src/public", "src/utils"]
 }
