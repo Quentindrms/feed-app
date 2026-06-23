@@ -1,7 +1,7 @@
 import { IsString, IsUrl } from "class-validator";
 
 export class CreateFeedDto {
-	@IsString()
+	@IsString({})
 	title!: string;
 
 	@IsUrl()
