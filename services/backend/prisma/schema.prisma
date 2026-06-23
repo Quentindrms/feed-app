@@ -24,6 +24,7 @@ model Feed {
 
 model Article {
   id          String   @id @unique @default(uuid())
+  guid        String
   title       String   @db.VarChar(150)
   link        String   @db.VarChar(200)
   publishDate DateTime @map("publish_date") @db.Date()
@@ -34,4 +35,6 @@ model Article {
   feedId String
 
   feed Feed @relation(fields: [feedId], references: [id])
+
+  @@unique([id, guid])
 }
