@@ -24,8 +24,9 @@ model Feed {
 
 model Article {
   id          String   @id @unique @default(uuid())
-  title       String   @db.VarChar(150)
-  link        String   @db.VarChar(200)
+  guid        String   @unique
+  title       String
+  link        String
   publishDate DateTime @map("publish_date") @db.Date()
   description String   @db.VarChar(300)
   isRead      Boolean  @map("is_read") @db.Boolean()

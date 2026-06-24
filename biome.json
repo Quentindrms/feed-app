@@ -8,7 +8,8 @@
 			"**/*.js",
 			"!services/backend/dist",
 			"!**/package.json",
-			"!**/.pnpm-store"
+			"!**/.pnpm-store",
+			"!**/generated"
 		]
 	},
 	"css": {
