@@ -24,9 +24,9 @@ model Feed {
 
 model Article {
   id          String   @id @unique @default(uuid())
-  guid        String
-  title       String   @db.VarChar(150)
-  link        String   @db.VarChar(200)
+  guid        String   @unique
+  title       String
+  link        String
   publishDate DateTime @map("publish_date") @db.Date()
   description String   @db.VarChar(300)
   isRead      Boolean  @map("is_read") @db.Boolean()
@@ -35,6 +35,4 @@ model Article {
   feedId String
 
   feed Feed @relation(fields: [feedId], references: [id])
-
-  @@unique([id, guid])
 }
