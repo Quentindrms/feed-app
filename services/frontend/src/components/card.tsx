@@ -10,8 +10,10 @@ interface CardProps {
 }
 
 export default function Card(props: CardProps) {
+	const publicationDate = new Date(props.publicationDate);
+
 	return (
-		<div className="flex flex-col gap-3 bg-muted-background/30 border border-dark-border/10 w-md rounded-2xl p-3">
+		<div className="flex flex-col gap-3 bg-muted-background/30 border border-dark-border/10 w-md h-65 rounded-2xl p-3">
 			<Heading component="h2" size="xl">
 				{props.title}
 			</Heading>
@@ -21,7 +23,7 @@ export default function Card(props: CardProps) {
 			<Text component="p" size="md" weight="extralight">
 				Date de publication :{" "}
 				<Text component="span" size="md" weight="light">
-					{props.publicationDate.toLocaleDateString("fr-FR")}
+					{publicationDate.toLocaleDateString("fr-FR")}
 				</Text>
 			</Text>
 			<Link href={props.link}>{"Consulter l'article"}</Link>
