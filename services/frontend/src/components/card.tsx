@@ -13,7 +13,7 @@ export default function Card(props: CardProps) {
 	const publicationDate = new Date(props.publicationDate);
 
 	return (
-		<div className="flex flex-col gap-3 bg-muted-background/30 border border-dark-border/10 w-md h-65 rounded-2xl p-3">
+		<div className="flex flex-col gap-3 shadow-md shadow-action-purple/30 bg-muted-background/30 border border-dark-border/10 w-md h-65 rounded-2xl p-3 hover:scale-101 transition-transform duration-150">
 			<Heading component="h2" size="xl">
 				{props.title}
 			</Heading>
