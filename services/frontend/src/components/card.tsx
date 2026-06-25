@@ -20,7 +20,7 @@ export default function Card(props: CardProps) {
 			<Text component="p" size="md" weight="light">
 				{props.description}
 			</Text>
-			<div className="flex justify-between">
+			<div className="flex flex-col md:flex-row md:justify-between">
 				<Text component="p" size="md" weight="extralight">
 					Date de publication :{" "}
 					<Text component="span" size="md" weight="light">
