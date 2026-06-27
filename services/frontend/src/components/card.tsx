@@ -13,14 +13,14 @@ export default function Card(props: CardProps) {
 	const publicationDate = new Date(props.publicationDate);
 
 	return (
-		<div className="flex flex-col justify-between gap-3 shadow-md shadow-dark/10 bg-muted-background/30 border border-dark-border/10 w-md h-65 rounded-2xl p-3 hover:scale-101 transition-transform duration-150">
+		<div className="flex flex-col justify-between gap-3 shadow-md shadow-dark/10 bg-muted-background/30 border border-dark-border/10 w-xs h-65 rounded-4xl p-3 hover:scale-101 transition-transform duration-150">
 			<Heading component="h2" size="xl">
 				{props.title}
 			</Heading>
 			<Text component="p" size="md" weight="light">
 				{props.description}
 			</Text>
-			<div className="flex flex-col md:flex-row md:justify-between">
+			<div className="flex flex-col">
 				<Text component="p" size="md" weight="extralight">
 					Date de publication :{" "}
 					<Text component="span" size="md" weight="light">

@@ -16,16 +16,18 @@ export default function Home() {
 	return (
 		<div className="bg-light-background min-h-dvh">
 			<NavBar />
-			<div className="flex flex-wrap justify-center items-center gap-3 p-4">
-				{articleList.map((article, index) => (
-					<Card
-						key={index}
-						description={article.description}
-						link={article.link}
-						publicationDate={article.publishDate}
-						title={article.title}
-					/>
-				))}
+			<div className="w-full flex justify-center">
+				<div className="flex flex-wrap justify-center items-center gap-6 md:flex-wrap w-6xl p-6">
+					{articleList.map((article, index) => (
+						<Card
+							key={index}
+							description={article.description}
+							link={article.link}
+							publicationDate={article.publishDate}
+							title={article.title}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);
