@@ -6,7 +6,7 @@ export const navigationLink = [
 		title: "Accueil",
 	},
 	{
-		link: "/",
+		link: "/flux",
 		title: "Gérer les flux",
 	},
 ];
