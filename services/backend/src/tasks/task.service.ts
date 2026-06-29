@@ -7,22 +7,34 @@ import { prisma } from "../libs/DatabaseClient";
 @Injectable()
 export class TaskService {
 	logger = new Logger(TaskService.name);
-	parser = new Parser();
+	parser = new Parser({
+		headers: {
+			"User-Agent": "feed-app veille by u/Dasteagle",
+		},
+		timeout: 10_000,
+	});
 
 	/**
 	 * Récupère les feeds puis les articles associés aux feeds
 	 * Retourne un objet ArticleCreateManyInput[] permettant la création des données
-	 * TODO : Trouver une solution aux rate limiting imposé par certain sites, en particulier Reddit. Le fetch sur différents subreddit génère une erreur 429 bloquante, trouver une solution de coutournement
+	 */
+
+	/**
+	 * TODO : Créer une fonction qui retourne soit le guid soit l'id de l'article, sinon le lien
 	 */
 
 	@Cron("*/5 * * * *")
 	async getArticle() {
-		const data = await this.prepareData();
-		const log = await prisma.article.createMany({
-			data,
-			skipDuplicates: true,
-		});
-		this.logger.log(`${log.count} nouvelle(s) entrée(s) dans la base`);
+		try {
+			const data = await this.prepareData();
+			const log = await prisma.article.createMany({
+				data,
+				skipDuplicates: true,
+			});
+			this.logger.log(`${log.count} nouvelle(s) entrée(s) dans la base`);
+		} catch (error) {
+			this.logger.error(error);
+		}
 	}
 
 	private async getAllFeeds() {
@@ -48,7 +60,7 @@ export class TaskService {
 		parsedFeeds.forEach((feed) => {
 			feed.data.items.forEach((item) => {
 				const article = {
-					guid: item.guid ? item.guid : "",
+					guid: item.guid ? item.guid : item.id,
 					createdAt: new Date(),
 					description: item.summary ? item.summary : "Aucune description",
 					feedId: feed.feedId,
