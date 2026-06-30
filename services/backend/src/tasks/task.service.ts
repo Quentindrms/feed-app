@@ -9,7 +9,7 @@ export class TaskService {
 	logger = new Logger(TaskService.name);
 	parser = new Parser({
 		headers: {
-			"User-Agent": "feed-app veille by u/Dasteagle",
+			"User-Agent": `feed-app veille by u/${process.env.REDDIT_USERNAME}`,
 		},
 		timeout: 10_000,
 	});
@@ -26,6 +26,7 @@ export class TaskService {
 	@Cron("*/5 * * * *")
 	async getArticle() {
 		try {
+			console.log(process.env.REDDIT_USERNAME);
 			const data = await this.prepareData();
 			const log = await prisma.article.createMany({
 				data,
