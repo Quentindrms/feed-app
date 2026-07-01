@@ -13,6 +13,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - FRONTEND_PORT=${FRONTEND_PORT:-3000}
     networks:
       - frontend
 
@@ -39,13 +40,27 @@ services:
       - ../services/backend:/app
       - /app/node_modules
     environment: 
+      - BACKEND_PORT=${BACKEND_PORT:-4000}
       - NODE_ENV=development
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - DATABASE_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_NAME}?schema=public
+      - REDDIT_USERNAME=${REDDIT_USERNAME}
     networks:
       - frontend
       - database 
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: feed-app-database-dev
+    volumes:
+      - ../database/development:/var/lib/postgresql/18/docker
+    environment: 
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - database
 networks:
   database: 
     driver: bridge

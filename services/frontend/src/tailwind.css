@@ -1,1 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Stack+Sans+Headline:wght@200..700&display=swap");
 @import "tailwindcss";
+
+@theme {
+	--color-light-background: oklch(98.5% 0 0);
+	--color-muted-background: oklch(92.9% 0.013 255.508);
+
+	--color-light-border: oklch(87.2% 0.01 258.338);
+	--color-dark-border: oklch(55.1% 0.027 264.364);
+
+	--color-dark: oklch(13% 0.028 261.692);
+	--color-light: oklch(98.4% 0.003 247.858);
+	--color-muted-text: oklch(70.4% 0.04 256.788);
+	--color-muted-text-dark: oklch(55.4% 0.046 257.417);
+
+	--color-action-purple: oklch(62.7% 0.265 303.9);
+	--color-action-orange: oklch(76.9% 0.188 70.08);
+	--color-action-green: oklch(69.6% 0.17 162.48);
+	--color-action-red: oklch(64.5% 0.246 16.439);
+
+	--font-title: "IBM Plex Sans", sans-serif;
+	--font-base: "Stack Sans Headline", sans-serif;
+}
