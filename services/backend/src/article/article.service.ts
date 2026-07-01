@@ -6,6 +6,13 @@ export class ArticleService {
 	async browseArticle() {
 		return await prisma.article.findMany({
 			where: { isRead: false },
+			include: {
+				feed: {
+					select: {
+						title: true,
+					},
+				},
+			},
 			orderBy: { publishDate: "desc" },
 		});
 	}
