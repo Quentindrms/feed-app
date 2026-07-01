@@ -5,4 +5,7 @@ export interface Article {
 	description: string;
 	isRead: boolean;
 	createdAt: Date;
+	feed: {
+		title: string;
+	};
 }

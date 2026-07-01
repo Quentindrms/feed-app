@@ -25,6 +25,7 @@ export default function Home() {
 							link={article.link}
 							publicationDate={article.publishDate}
 							title={article.title}
+							source={article.feed.title}
 						/>
 					))}
 				</div>
