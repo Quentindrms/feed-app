@@ -27,7 +27,8 @@
 			"@components/*": ["components/*"],
 			"@src/*": ["src/*"],
 			"@utils/*": ["utils/*"],
-			"@public": ["public/*"]
+			"@public": ["public/*"],
+			"@hooks": ["hooks/*"]
 		}
 	},
 	"include": ["src", "src/components", "src/public", "src/utils"]

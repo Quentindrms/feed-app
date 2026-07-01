@@ -52,6 +52,9 @@
 			},
 			"nursery": {
 				"noUndeclaredClasses": "off"
+			},
+			"correctness": {
+				"useJsxKeyInIterable": "warn"
 			}
 		}
 	},

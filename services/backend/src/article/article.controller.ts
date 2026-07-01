@@ -5,9 +5,9 @@ import { ArticleService } from "./article.service";
 export class ArticleController {
 	constructor(private readonly articleService: ArticleService) {}
 
-	@Get("test")
-	test() {
-		console.log("test");
-		return;
+	@Get("")
+	async test() {
+		const article = await this.articleService.browseArticle();
+		return article;
 	}
 }
