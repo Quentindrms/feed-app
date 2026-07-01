@@ -1,5 +1,4 @@
 import Heading from "./heading";
-import Link from "./link";
 import Text from "./text";
 
 interface CardProps {
@@ -7,28 +6,30 @@ interface CardProps {
 	link: string;
 	description: string;
 	publicationDate: Date;
+	source: string;
 }
 
 export default function Card(props: CardProps) {
-	const publicationDate = new Date(props.publicationDate);
+	const publicationDate = new Date(props.publicationDate).toLocaleDateString("fr-FR");
 
 	return (
-		<div className="flex flex-col justify-between gap-3 shadow-md shadow-dark/10 bg-muted-background/30 border border-dark-border/10 w-xs h-65 rounded-4xl p-3 hover:scale-101 transition-transform duration-150">
-			<Heading component="h2" size="xl">
-				{props.title}
-			</Heading>
-			<Text component="p" size="md" weight="light">
-				{props.description}
-			</Text>
-			<div className="flex flex-col">
-				<Text component="p" size="md" weight="extralight">
-					Date de publication :{" "}
-					<Text component="span" size="md" weight="light">
-						{publicationDate.toLocaleDateString("fr-FR")}
-					</Text>
+		<div className="w-xs md:w-5xl bg-muted-background/20 border border-dark-border/10 hover:border-dark-border/20 rounded-2xl hover:scale-110 transition-transform duration-300">
+			<a
+				href={props.link}
+				className="w-full flex flex-col md:flex-row items-center p-4 gap-4"
+			>
+				<div className="w-fit md:w-md text-justify m-2">
+					<Heading component="h2" size="md">
+						{props.title}
+					</Heading>
+				</div>
+				<Text size="xs" weight="extralight" component="p">
+					({props.source})
 				</Text>
-				<Link href={props.link}>{"Consulter l'article"}</Link>
-			</div>
+				<Text size="md" weight="normal" component="p">
+					{publicationDate}
+				</Text>
+			</a>
 		</div>
 	);
 }
