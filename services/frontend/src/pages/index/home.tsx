@@ -4,6 +4,7 @@ import NavBar from "@src/components/navBar";
 import useArticle from "@src/hooks/useArticle";
 import { type Article } from "@src/types/article";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 
 export default function Home() {
 	const article = useArticle();
@@ -11,12 +12,17 @@ export default function Home() {
 	const [articleList, setArticleList] = useState<Article[]>([]);
 	const [count, setCount] = useState(0);
 	const [pages, setPages] = useState<Array<number>>([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [searchParams, setSearchParams] = useSearchParams({ tab: "1" });
+	const currentPage = Number(searchParams.get("tab")) || 1;
+
+	function setCurrentPage(page: number) {
+		setSearchParams({ tab: String(page) });
+	}
 
 	useEffect(() => {
 		article.browseArticle().then(setArticleList);
 		article.countArticle().then(setCount);
-	}, []);
+	}, [currentPage]);
 
 	useEffect(() => {
 		setPages(article.countPageNumber(count, 10));
