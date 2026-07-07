@@ -6,6 +6,7 @@ export default function useArticle() {
 
 	async function browseArticle(page: number, limit = 20) {
 		const article = await fetcher.get<Article[]>(`article?page=${page}&limit=${limit}`);
+		window.scrollTo(0, 0);
 		return article;
 	}
 
