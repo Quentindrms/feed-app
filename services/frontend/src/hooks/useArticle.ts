@@ -4,10 +4,12 @@ import { Fetcher } from "@src/utils/Fetcher";
 export default function useArticle() {
 	const fetcher = new Fetcher();
 
-	async function browseArticle() {
-		const article = await fetcher.get<Article[]>(`article`);
+	async function browseArticle(page: number, limit = 20) {
+		const article = await fetcher.get<Article[]>(`article?page=${page}&limit=${limit}`);
 		return article;
 	}
+
+	async function browseArticleSample() {}
 
 	async function countArticle() {
 		const total = await fetcher.get("article/count");

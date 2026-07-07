@@ -20,12 +20,12 @@ export default function Home() {
 	}
 
 	useEffect(() => {
-		article.browseArticle().then(setArticleList);
+		article.browseArticle(currentPage, 20).then(setArticleList);
 		article.countArticle().then(setCount);
 	}, [currentPage]);
 
 	useEffect(() => {
-		setPages(article.countPageNumber(count, 10));
+		setPages(article.countPageNumber(count, 20));
 	}, [count]);
 
 	return (
@@ -46,19 +46,29 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="flex gap-2 justify-center items-center">
-				{pages.slice(0, 5).map((page) => (
-					<PaginationButton
-						key={page}
-						number={page}
-						onClick={() => setCurrentPage(page)}
-					/>
-				))}
-				{pages.length > 6 && <span>...</span>}
-				{pages.length > 5 && (
-					<PaginationButton
-						number={pages[pages.length - 1]}
-						onClick={() => setCurrentPage(pages[pages.length - 1])}
-					/>
+				{currentPage > 3 && (
+					<>
+						<PaginationButton number={1} onClick={() => setCurrentPage(1)} />
+						{currentPage > 4 && <span>...</span>}
+					</>
+				)}
+				{pages
+					.filter((page) => Math.abs(page - currentPage) <= 2)
+					.map((page) => (
+						<PaginationButton
+							key={page}
+							number={page}
+							onClick={() => setCurrentPage(page)}
+						/>
+					))}
+				{currentPage < pages.length - 2 && (
+					<>
+						{currentPage < pages.length - 3 && <span>...</span>}
+						<PaginationButton
+							number={pages.length}
+							onClick={() => setCurrentPage(pages.length)}
+						/>
+					</>
 				)}
 			</div>
 		</div>
