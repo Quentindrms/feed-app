@@ -9,8 +9,6 @@ export default function useArticle() {
 		return article;
 	}
 
-	async function browseArticleSample() {}
-
 	async function countArticle() {
 		const total = await fetcher.get("article/count");
 		return total;
