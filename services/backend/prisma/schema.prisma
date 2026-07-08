@@ -29,7 +29,8 @@ model Article {
   link        String
   publishDate DateTime @map("publish_date") @db.Date()
   description String   @db.VarChar(300)
-  isRead      Boolean  @map("is_read") @db.Boolean()
+  isRead      Boolean  @default(false) @map("is_read") @db.Boolean()
+  isFavorite  Boolean  @default(false) @map("is_favorite") @db.Boolean()
   createdAt   DateTime @map("created_at") @db.Date()
 
   feedId String
