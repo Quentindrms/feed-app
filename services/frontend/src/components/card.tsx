@@ -1,3 +1,4 @@
+import { CiBookmarkPlus, CiBookmarkRemove } from "react-icons/ci";
 import Heading from "./heading";
 import Text from "./text";
 
@@ -7,6 +8,7 @@ interface CardProps {
 	description: string;
 	publicationDate: Date;
 	source: string;
+	isFavorite: boolean;
 }
 
 export default function Card(props: CardProps) {
@@ -23,12 +25,15 @@ export default function Card(props: CardProps) {
 						{props.title}
 					</Heading>
 				</div>
-				<Text size="xs" weight="extralight" component="p">
-					({props.source})
-				</Text>
-				<Text size="md" weight="normal" component="p">
-					{publicationDate}
-				</Text>
+				<div className="w-xs">
+					<Text size="xs" weight="extralight" component="p">
+						({props.source})
+					</Text>
+					<Text size="md" weight="normal" component="p">
+						{publicationDate}
+					</Text>
+				</div>
+				{props.isFavorite ? <CiBookmarkRemove size={26} /> : <CiBookmarkPlus size={26} />}
 			</a>
 		</div>
 	);

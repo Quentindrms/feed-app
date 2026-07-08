@@ -41,6 +41,7 @@ export default function Home() {
 							publicationDate={article.publishDate}
 							title={article.title}
 							source={article.feed.title}
+							isFavorite={false}
 						/>
 					))}
 				</div>
