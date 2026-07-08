@@ -19,6 +19,8 @@ export default function Card(props: CardProps) {
 			<a
 				href={props.link}
 				className="w-full flex flex-col md:flex-row items-center p-4 gap-4"
+				target="_blank"
+				rel="noopener"
 			>
 				<div className="w-fit md:w-md text-justify m-2">
 					<Heading component="h2" size="md">

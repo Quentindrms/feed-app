@@ -11,7 +11,7 @@ export default function useArticle() {
 	}
 
 	async function countArticle() {
-		const total = await fetcher.get("article/count");
+		const total = await fetcher.get<number>("article/count");
 		return total;
 	}
 
