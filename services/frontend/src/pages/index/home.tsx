@@ -42,6 +42,7 @@ export default function Home() {
 							title={article.title}
 							source={article.feed.title}
 							isFavorite={article.isFavorite}
+							isRead={article.isRead}
 						/>
 					))}
 				</div>

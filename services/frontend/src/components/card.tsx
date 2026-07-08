@@ -1,4 +1,4 @@
-import { CiBookmarkPlus, CiBookmarkRemove } from "react-icons/ci";
+import { CiBookmarkPlus, CiBookmarkRemove, CiCircleCheck, CiCircleRemove } from "react-icons/ci";
 import Heading from "./heading";
 import Text from "./text";
 
@@ -9,6 +9,7 @@ interface CardProps {
 	publicationDate: Date;
 	source: string;
 	isFavorite: boolean;
+	isRead: boolean;
 }
 
 export default function Card(props: CardProps) {
@@ -36,6 +37,7 @@ export default function Card(props: CardProps) {
 					</Text>
 				</div>
 				{props.isFavorite ? <CiBookmarkRemove size={26} /> : <CiBookmarkPlus size={26} />}
+				{props.isRead ? <CiCircleRemove size={26} /> : <CiCircleCheck size={25} />}
 			</a>
 		</div>
 	);
