@@ -26,7 +26,6 @@ export class TaskService {
 	@Cron("*/5 * * * *")
 	async getArticle() {
 		try {
-			console.log(process.env.REDDIT_USERNAME);
 			const data = await this.prepareData();
 			const log = await prisma.article.createMany({
 				data,
