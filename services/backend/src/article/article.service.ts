@@ -16,4 +16,10 @@ export class ArticleService {
 	async countArticle() {
 		return await prisma.article.count();
 	}
+
+	async toggleFavorite(id: string, isFavorite: boolean) {
+		try {
+			return await prisma.article.update({ where: { id }, data: { isFavorite } });
+		} catch (error) {}
+	}
 }
