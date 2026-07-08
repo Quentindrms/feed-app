@@ -4,6 +4,7 @@ export interface Article {
 	publishDate: Date;
 	description: string;
 	isRead: boolean;
+	isFavorite: boolean;
 	createdAt: Date;
 	feed: {
 		title: string;
