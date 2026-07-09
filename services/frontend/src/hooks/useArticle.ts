@@ -15,6 +15,11 @@ export default function useArticle() {
 		return total;
 	}
 
+	async function toggleFavorite(id: string, isFavorite: boolean) {
+		console.log(id, isFavorite);
+		const response = await fetcher.patch(`article/${id}`, { isFavorite });
+	}
+
 	function countPageNumber(totalArticle: number, pagination: number) {
 		return Array.from({ length: Math.ceil(totalArticle / pagination) }, (_, i) => i + 1);
 	}
@@ -23,5 +28,6 @@ export default function useArticle() {
 		browseArticle,
 		countArticle,
 		countPageNumber,
+		toggleFavorite,
 	};
 }

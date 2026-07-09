@@ -10,13 +10,16 @@ interface CardProps {
 	source: string;
 	isFavorite: boolean;
 	isRead: boolean;
+
+	onToggleFavorite: () => void;
+	//onToggleRead: () => void;
 }
 
 export default function Card(props: CardProps) {
 	const publicationDate = new Date(props.publicationDate).toLocaleDateString("fr-FR");
 
 	return (
-		<div className="w-xs md:w-5xl bg-muted-background/20 border border-dark-border/10 hover:border-dark-border/20 rounded-2xl hover:scale-110 transition-transform duration-300">
+		<div className="flex items-center justify-between w-xs md:w-5xl bg-muted-background/20 border border-dark-border/10 hover:border-dark-border/20 rounded-2xl hover:scale-110 transition-transform duration-300">
 			<a
 				href={props.link}
 				className="w-full flex flex-col md:flex-row items-center p-4 gap-4"
@@ -36,9 +39,14 @@ export default function Card(props: CardProps) {
 						{publicationDate}
 					</Text>
 				</div>
-				{props.isFavorite ? <CiBookmarkRemove size={26} /> : <CiBookmarkPlus size={26} />}
-				{props.isRead ? <CiCircleRemove size={26} /> : <CiCircleCheck size={25} />}
 			</a>
+
+			{props.isFavorite ? (
+				<CiBookmarkRemove size={26} onClick={props.onToggleFavorite} />
+			) : (
+				<CiBookmarkPlus size={26} onClick={props.onToggleFavorite} />
+			)}
+			{props.isRead ? <CiCircleRemove size={26} /> : <CiCircleCheck size={25} />}
 		</div>
 	);
 }

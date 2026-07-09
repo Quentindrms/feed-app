@@ -33,16 +33,19 @@ export default function Home() {
 			<NavBar />
 			<div className="w-full flex justify-center">
 				<div className="flex flex-wrap justify-center items-center gap-6 md:flex-wrap w-6xl p-6">
-					{articleList.map((article, index) => (
+					{articleList.map((item, index) => (
 						<Card
 							key={index}
-							description={article.description}
-							link={article.link}
-							publicationDate={article.publishDate}
-							title={article.title}
-							source={article.feed.title}
-							isFavorite={article.isFavorite}
-							isRead={article.isRead}
+							description={item.description}
+							link={item.link}
+							publicationDate={item.publishDate}
+							title={item.title}
+							source={item.feed.title}
+							isFavorite={item.isFavorite}
+							isRead={item.isRead}
+							onToggleFavorite={() =>
+								article.toggleFavorite(item.id, !item.isFavorite)
+							}
 						/>
 					))}
 				</div>
