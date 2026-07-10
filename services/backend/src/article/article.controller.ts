@@ -21,7 +21,7 @@ export class ArticleController {
 
 	@Get("favorite")
 	async browseFavorite(@Query("page") page?: string, @Query("limit") limit?: string) {
-		return this.articleService.browseFavorite();
+		return this.articleService.browseFavorite(Number(page), Number(limit));
 	}
 
 	@Patch("favorite/:id")
