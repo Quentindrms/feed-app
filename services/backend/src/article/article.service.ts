@@ -32,6 +32,10 @@ export class ArticleService {
 		return await prisma.article.count();
 	}
 
+	async countFavorite() {
+		return await prisma.article.count({ where: { isFavorite: true } });
+	}
+
 	async browseFavorite(page = 1, limit = 20) {
 		try {
 			return await prisma.article.findMany({

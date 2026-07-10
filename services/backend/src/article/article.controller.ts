@@ -24,6 +24,11 @@ export class ArticleController {
 		return await this.articleService.browseFavorite(Number(page), Number(limit));
 	}
 
+	@Get("favorite/count")
+	async countFavorite() {
+		return await this.articleService.countFavorite();
+	}
+
 	@Patch("favorite/:id")
 	@UsePipes(validationPipe)
 	async toggleFavorite(@Param("id") articleId: string, @Body() body: ToggleFavoriteDto) {
