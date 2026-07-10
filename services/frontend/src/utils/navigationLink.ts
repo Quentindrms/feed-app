@@ -9,4 +9,8 @@ export const navigationLink = [
 		link: "/flux",
 		title: "Gérer les flux",
 	},
+	{
+		link: "/favorite",
+		title: "Favoris",
+	},
 ];

@@ -12,6 +12,11 @@ export default function useArticle() {
 		setArticleList(result);
 	}
 
+	async function browseFavorite(page: number, limit = 20) {
+		const result = await fetcher.get<Article[]>(`article/favorite?page=${page}&limit=${limit}`);
+		setArticleList(result);
+	}
+
 	async function countArticle() {
 		const total = await fetcher.get<number>("article/count");
 		return total;
@@ -80,6 +85,7 @@ export default function useArticle() {
 	return {
 		articleList,
 		browseArticle,
+		browseFavorite,
 		countArticle,
 		countPageNumber,
 		toggleFavorite,
