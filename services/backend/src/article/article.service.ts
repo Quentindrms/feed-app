@@ -1,4 +1,10 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import {
+	Injectable,
+	InternalServerErrorException,
+	Logger,
+	NotFoundException,
+} from "@nestjs/common";
+import { PrismaClientValidationError } from "@prisma/client/runtime/client";
 import { Prisma } from "../generated/prisma/client";
 import { prisma } from "../libs/DatabaseClient";
 
@@ -7,13 +13,19 @@ export class ArticleService {
 	logger = new Logger();
 
 	async browseArticle(page = 1, limit = 20) {
-		return await prisma.article.findMany({
-			where: { isRead: false },
-			include: { feed: { select: { title: true } } },
-			orderBy: { publishDate: "desc" },
-			skip: (page - 1) * limit,
-			take: limit,
-		});
+		try {
+			return await prisma.article.findMany({
+				where: { isRead: false },
+				include: { feed: { select: { title: true } } },
+				orderBy: { publishDate: "desc" },
+				skip: (page - 1) * limit,
+				take: limit,
+			});
+		} catch (error) {
+			if (error instanceof PrismaClientValidationError) {
+				throw new InternalServerErrorException(error.message);
+			}
+		}
 	}
 
 	async countArticle() {
@@ -21,15 +33,21 @@ export class ArticleService {
 	}
 
 	async browseFavorite(page = 1, limit = 20) {
-		return await prisma.article.findMany({
-			where: { isFavorite: true },
-			include: {
-				feed: { select: { title: true } },
-			},
-			orderBy: { publishDate: "desc" },
-			skip: (page - 1) * limit,
-			take: limit,
-		});
+		try {
+			return await prisma.article.findMany({
+				where: { isFavorite: true },
+				include: {
+					feed: { select: { title: true } },
+				},
+				orderBy: { publishDate: "desc" },
+				skip: (page - 1) * limit,
+				take: limit,
+			});
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientValidationError) {
+				throw new InternalServerErrorException(error.message);
+			}
+		}
 	}
 
 	async toggleFavorite(id: string, isFavorite: boolean) {
