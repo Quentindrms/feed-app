@@ -12,7 +12,7 @@ interface CardProps {
 	isRead: boolean;
 
 	onToggleFavorite: () => void;
-	//onToggleRead: () => void;
+	onToggleRead: () => void;
 }
 
 export default function Card(props: CardProps) {
@@ -46,7 +46,11 @@ export default function Card(props: CardProps) {
 			) : (
 				<CiBookmarkPlus size={26} onClick={props.onToggleFavorite} />
 			)}
-			{props.isRead ? <CiCircleRemove size={26} /> : <CiCircleCheck size={25} />}
+			{props.isRead ? (
+				<CiCircleRemove size={26} onClick={props.onToggleRead} />
+			) : (
+				<CiCircleCheck size={25} onClick={props.onToggleRead} />
+			)}
 		</div>
 	);
 }

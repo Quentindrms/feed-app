@@ -42,6 +42,7 @@ export default function Home() {
 							isFavorite={item.isFavorite}
 							isRead={item.isRead}
 							onToggleFavorite={() => article.toggleFavorite(item)}
+							onToggleRead={() => article.toggleIsRead(item)}
 						/>
 					))}
 				</div>

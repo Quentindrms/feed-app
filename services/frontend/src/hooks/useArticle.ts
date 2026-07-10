@@ -26,7 +26,7 @@ export default function useArticle() {
 			),
 		);
 		try {
-			const updated = await fetcher.patch<Article>(`article/${item.id}`, {
+			const updated = await fetcher.patch<Article>(`article/favorite/${item.id}`, {
 				isFavorite: nextValue,
 			});
 			setArticleList((prev) =>
@@ -46,6 +46,33 @@ export default function useArticle() {
 		}
 	}
 
+	async function toggleIsRead(item: Article) {
+		const nextValue = !item.isFavorite;
+
+		setArticleList((prev) =>
+			prev.map((article) =>
+				article.id === item.id ? { ...article, isRead: true } : article,
+			),
+		);
+		try {
+			const updated = await fetcher.patch<Article>(`article/read/${item.id}`, {
+				isRead: nextValue,
+			});
+			setArticleList((prev) =>
+				prev.map((article) =>
+					article.id === item.id ? { ...article, isFavorite: updated.isRead } : article,
+				),
+			);
+		} catch (error) {
+			setArticleList((prev) =>
+				prev.map((article) =>
+					article.id === item.id ? { ...article, isRead: item.isRead } : article,
+				),
+			);
+			console.error("Failed to toggle read", error);
+		}
+	}
+
 	function countPageNumber(totalArticle: number, pagination: number) {
 		return Array.from({ length: Math.ceil(totalArticle / pagination) }, (_, i) => i + 1);
 	}
@@ -56,5 +83,6 @@ export default function useArticle() {
 		countArticle,
 		countPageNumber,
 		toggleFavorite,
+		toggleIsRead,
 	};
 }
