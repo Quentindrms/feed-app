@@ -1,13 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	Param,
-	Patch,
-	Query,
-	UsePipes,
-	ValidationPipe,
-} from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Query, UsePipes } from "@nestjs/common";
 import { ToggleFavoriteDto } from "../dto/articleDto";
 import { validationPipe } from "../pipes/validationPipe";
 import { ArticleService } from "./article.service";

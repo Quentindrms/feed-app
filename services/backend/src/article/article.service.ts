@@ -1,8 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Prisma } from "../generated/prisma/client";
 import { prisma } from "../libs/DatabaseClient";
 
 @Injectable()
 export class ArticleService {
+	logger = new Logger();
+
 	async browseArticle(page = 1, limit = 20) {
 		return await prisma.article.findMany({
 			where: { isRead: false },
@@ -20,6 +23,11 @@ export class ArticleService {
 	async toggleFavorite(id: string, isFavorite: boolean) {
 		try {
 			return await prisma.article.update({ where: { id }, data: { isFavorite } });
-		} catch (error) {}
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+				throw new NotFoundException(`Unknow article : ${id}`);
+			}
+			throw error;
+		}
 	}
 }
