@@ -30,4 +30,15 @@ export class ArticleService {
 			throw error;
 		}
 	}
+
+	async toggleRead(id: string, isRead: boolean) {
+		try {
+			return await prisma.article.update({ where: { id }, data: { isRead } });
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+				throw new NotFoundException(`Unknow article : ${id}`);
+			}
+			throw error;
+		}
+	}
 }

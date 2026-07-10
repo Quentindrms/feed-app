@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Query, UsePipes } from "@nestjs/common";
-import { ToggleFavoriteDto } from "../dto/articleDto";
+import { ToggleFavoriteDto, ToggleIsReadDto } from "../dto/articleDto";
 import { validationPipe } from "../pipes/validationPipe";
 import { ArticleService } from "./article.service";
 
@@ -19,10 +19,15 @@ export class ArticleController {
 		return total;
 	}
 
-	@Patch(":id")
+	@Patch("favorite/:id")
 	@UsePipes(validationPipe)
 	async toggleFavorite(@Param("id") articleId: string, @Body() body: ToggleFavoriteDto) {
 		const isFavorite = await this.articleService.toggleFavorite(articleId, body.isFavorite);
 		return isFavorite;
+	}
+
+	@Patch("read/:id")
+	async toggleRead(@Param("id") articleId: string, @Body() body: ToggleIsReadDto) {
+		return await this.articleService.toggleRead(articleId, body.isRead);
 	}
 }
