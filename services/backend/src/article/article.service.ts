@@ -20,6 +20,18 @@ export class ArticleService {
 		return await prisma.article.count();
 	}
 
+	async browseFavorite(page = 1, limit = 20) {
+		return await prisma.article.findMany({
+			where: { isFavorite: true },
+			include: {
+				feed: { select: { title: true } },
+			},
+			orderBy: { publishDate: "desc" },
+			skip: (page - 1) * limit,
+			take: limit,
+		});
+	}
+
 	async toggleFavorite(id: string, isFavorite: boolean) {
 		try {
 			return await prisma.article.update({ where: { id }, data: { isFavorite } });

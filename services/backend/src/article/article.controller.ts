@@ -19,6 +19,11 @@ export class ArticleController {
 		return total;
 	}
 
+	@Get("favorite")
+	async browseFavorite(@Query("page") page?: string, @Query("limit") limit?: string) {
+		return this.articleService.browseFavorite();
+	}
+
 	@Patch("favorite/:id")
 	@UsePipes(validationPipe)
 	async toggleFavorite(@Param("id") articleId: string, @Body() body: ToggleFavoriteDto) {
