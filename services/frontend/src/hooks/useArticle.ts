@@ -1,13 +1,15 @@
 import type { Article } from "@src/types/article";
 import { Fetcher } from "@src/utils/Fetcher";
+import { useState } from "react";
 
 export default function useArticle() {
 	const fetcher = new Fetcher();
+	const [articleList, setArticleList] = useState<Article[]>([]);
 
 	async function browseArticle(page: number, limit = 20) {
-		const article = await fetcher.get<Article[]>(`article?page=${page}&limit=${limit}`);
+		const result = await fetcher.get<Article[]>(`article?page=${page}&limit=${limit}`);
 		window.scrollTo(0, 0);
-		return article;
+		setArticleList(result);
 	}
 
 	async function countArticle() {
@@ -15,9 +17,34 @@ export default function useArticle() {
 		return total;
 	}
 
-	async function toggleFavorite(id: string, isFavorite: boolean) {
-		console.log(id, isFavorite);
-		const response = await fetcher.patch(`article/${id}`, { isFavorite });
+	async function toggleFavorite(item: Article) {
+		const nextValue = !item.isFavorite;
+
+		setArticleList((prev) =>
+			prev.map((article) =>
+				article.id === item.id ? { ...article, isFavorite: nextValue } : article,
+			),
+		);
+		try {
+			const updated = await fetcher.patch<Article>(`article/${item.id}`, {
+				isFavorite: nextValue,
+			});
+			setArticleList((prev) =>
+				prev.map((article) =>
+					article.id === item.id
+						? { ...article, isFavorite: updated.isFavorite }
+						: article,
+				),
+			);
+			console.log("Success");
+		} catch (error) {
+			setArticleList((prev) =>
+				prev.map((article) =>
+					article.id === item.id ? { ...article, isFavorite: item.isFavorite } : article,
+				),
+			);
+			console.error("Failed to toggle favorite", error);
+		}
 	}
 
 	function countPageNumber(totalArticle: number, pagination: number) {
@@ -25,6 +52,7 @@ export default function useArticle() {
 	}
 
 	return {
+		articleList,
 		browseArticle,
 		countArticle,
 		countPageNumber,

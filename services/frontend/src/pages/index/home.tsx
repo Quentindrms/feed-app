@@ -2,14 +2,12 @@ import { PaginationButton } from "@src/components/button";
 import Card from "@src/components/card";
 import NavBar from "@src/components/navBar";
 import useArticle from "@src/hooks/useArticle";
-import { type Article } from "@src/types/article";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 export default function Home() {
 	const article = useArticle();
 
-	const [articleList, setArticleList] = useState<Article[]>([]);
 	const [count, setCount] = useState(0);
 	const [pages, setPages] = useState<Array<number>>([]);
 	const [searchParams, setSearchParams] = useSearchParams({ tab: "1" });
@@ -20,7 +18,7 @@ export default function Home() {
 	}
 
 	useEffect(() => {
-		article.browseArticle(currentPage, 20).then(setArticleList);
+		article.browseArticle(currentPage, 20);
 		article.countArticle().then(setCount);
 	}, [currentPage]);
 
@@ -33,7 +31,7 @@ export default function Home() {
 			<NavBar />
 			<div className="w-full flex justify-center">
 				<div className="flex flex-wrap justify-center items-center gap-6 md:flex-wrap w-6xl p-6">
-					{articleList.map((item, index) => (
+					{article.articleList.map((item, index) => (
 						<Card
 							key={index}
 							description={item.description}
@@ -43,9 +41,7 @@ export default function Home() {
 							source={item.feed.title}
 							isFavorite={item.isFavorite}
 							isRead={item.isRead}
-							onToggleFavorite={() =>
-								article.toggleFavorite(item.id, !item.isFavorite)
-							}
+							onToggleFavorite={() => article.toggleFavorite(item)}
 						/>
 					))}
 				</div>
