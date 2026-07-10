@@ -36,7 +36,6 @@ export default function useArticle() {
 						: article,
 				),
 			);
-			console.log("Success");
 		} catch (error) {
 			setArticleList((prev) =>
 				prev.map((article) =>
