@@ -17,6 +17,10 @@ export default function useArticle() {
 		setArticleList(result);
 	}
 
+	async function countFavorite() {
+		return await fetcher.get<number>("article/favorite/count");
+	}
+
 	async function countArticle() {
 		const total = await fetcher.get<number>("article/count");
 		return total;
@@ -87,6 +91,7 @@ export default function useArticle() {
 		browseArticle,
 		browseFavorite,
 		countArticle,
+		countFavorite,
 		countPageNumber,
 		toggleFavorite,
 		toggleIsRead,
